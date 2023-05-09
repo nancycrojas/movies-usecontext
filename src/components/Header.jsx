@@ -10,9 +10,14 @@ import {
 import { FavoritesDrawer } from './FavoritesDrawer'
 import { StarIcon } from '@chakra-ui/icons'
 import { LoginModal } from './auth/LoginModal'
+import { useContext } from 'react'
+import { UserContext } from '../context/user/UserContext'
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { user, logout } = useContext(UserContext)
+  console.log(user)
+
   return (
     <Stack>
       <HStack flexDirection={{ base: 'column', md: 'row' }}>
@@ -30,9 +35,13 @@ export const Header = () => {
           >
             Favorites
           </Button>
-          <LoginModal color="white" variant="outline" mr={6}>
-            Login
-          </LoginModal>
+          {user ? (
+            <Button mr={6} onClick={logout}>
+              Logout
+            </Button>
+          ) : (
+            <LoginModal />
+          )}
         </ButtonGroup>
       </HStack>
       <FavoritesDrawer isOpen={isOpen} onClose={onClose} />

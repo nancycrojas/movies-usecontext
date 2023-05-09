@@ -14,7 +14,9 @@ import {
   Input,
   SimpleGrid,
 } from '@chakra-ui/react'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { UserContext } from '../../context/user/UserContext'
 
 export const LoginModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -24,19 +26,22 @@ export const LoginModal = () => {
     formState: { errors },
   } = useForm()
 
-  const login = (data) => {
-    console.log(data)
+  const { login } = useContext(UserContext)
+
+  const handleLogin = (data) => {
+    login(data)
+    onClose()
   }
 
   return (
     <>
-      <Button onClick={onOpen} mr={6}>
+      <Button onClick={onOpen} color="white" variant="outline" mr={6}>
         Login
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent as="form" onSubmit={handleSubmit(login)}>
+        <ModalContent as="form" onSubmit={handleSubmit(handleLogin)}>
           <ModalHeader>Login</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
