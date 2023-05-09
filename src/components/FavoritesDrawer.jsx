@@ -15,8 +15,10 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Movie } from './Movie'
+import { useLangContext } from '../context/lang/LangProvider'
 
 export const FavoritesDrawer = ({ isOpen, onClose }) => {
+  const { t } = useLangContext()
   const { favorites, clearFavorites, removeFavorite } =
     useContext(FavoritesContext)
 
@@ -26,14 +28,14 @@ export const FavoritesDrawer = ({ isOpen, onClose }) => {
       <DrawerContent bg="#00081D">
         <DrawerCloseButton color="white" />
 
-        <DrawerHeader color="white">Your Favorites</DrawerHeader>
+        <DrawerHeader color="white">{t('yourFavorites')}</DrawerHeader>
         <DrawerBody>
           <Button mt={2} onClick={clearFavorites}>
-            Clear Favorites
+            {t('clearFavorites')}
           </Button>
           {!favorites.length && (
             <Text mt={3} color="white">
-              No favorites
+              {t('noFavorites')}
             </Text>
           )}
           {favorites && (
@@ -49,7 +51,7 @@ export const FavoritesDrawer = ({ isOpen, onClose }) => {
                       size="sm"
                       onClick={() => removeFavorite(fav.id)}
                     >
-                      Remove
+                      {t('remove')}
                     </Button>
                   </HStack>
                   <Divider />

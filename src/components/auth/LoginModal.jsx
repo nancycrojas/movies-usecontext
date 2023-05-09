@@ -17,8 +17,10 @@ import {
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { UserContext } from '../../context/user/UserContext'
+import { useLangContext } from '../../context/lang/LangProvider'
 
 export const LoginModal = () => {
+  const { t } = useLangContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     register,
@@ -35,23 +37,23 @@ export const LoginModal = () => {
 
   return (
     <>
-      <Button onClick={onOpen} color="white" variant="outline" mr={6}>
-        Login
+      <Button onClick={onOpen} color="white" variant="outline" mr={2}>
+        {t('login')}
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(handleLogin)}>
-          <ModalHeader>Login</ModalHeader>
+          <ModalHeader>{t('login')}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <SimpleGrid gap={5}>
               <FormControl isInvalid={!!errors.email}>
-                <FormLabel>Email address</FormLabel>
+                <FormLabel>{t('email')}</FormLabel>
                 <Input
                   type="email"
                   {...register('email', {
-                    required: 'This field is required',
+                    required: t('required'),
                     pattern: {
                       value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                       message: 'This email is not valid',
@@ -61,11 +63,11 @@ export const LoginModal = () => {
                 <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.password}>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t('password')}</FormLabel>
                 <Input
                   type="password"
                   {...register('password', {
-                    required: 'This field is required',
+                    required: t('required'),
                     minLength: {
                       value: 6,
                       message: 'The password is too short',
@@ -79,7 +81,7 @@ export const LoginModal = () => {
 
           <ModalFooter>
             <Button variant="ghost" mr={3} onClick={onClose}>
-              Close
+              {t('close')}
             </Button>
             <Button colorScheme="blue" type="submit">
               Login

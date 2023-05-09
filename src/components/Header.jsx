@@ -12,20 +12,22 @@ import { StarIcon } from '@chakra-ui/icons'
 import { LoginModal } from './auth/LoginModal'
 import { useContext } from 'react'
 import { UserContext } from '../context/user/UserContext'
+import { LangMenu } from './LangMenu'
+import { useLangContext } from '../context/lang/LangProvider'
 
 export const Header = () => {
+  const { t } = useLangContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user, logout } = useContext(UserContext)
-  console.log(user)
 
   return (
     <Stack>
       <HStack flexDirection={{ base: 'column', md: 'row' }}>
         <Heading as="h1" size="xl" color="#FFDE2B" m={6}>
-          Movies
+          {t('movies')}
         </Heading>
         <Spacer />
-        <ButtonGroup>
+        <ButtonGroup flexWrap="wrap" justifyContent="center" gap={2}>
           <Button
             colorScheme="red"
             variant="solid"
@@ -33,15 +35,10 @@ export const Header = () => {
             leftIcon={<StarIcon />}
             onClick={onOpen}
           >
-            Favorites
+            {t('favorites')}
           </Button>
-          {user ? (
-            <Button mr={6} onClick={logout}>
-              Logout
-            </Button>
-          ) : (
-            <LoginModal />
-          )}
+          {user ? <Button onClick={logout}>Logout</Button> : <LoginModal />}
+          <LangMenu />
         </ButtonGroup>
       </HStack>
       <FavoritesDrawer isOpen={isOpen} onClose={onClose} />
