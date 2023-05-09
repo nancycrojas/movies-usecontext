@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { FavoritesDrawer } from './FavoritesDrawer'
 import { StarIcon } from '@chakra-ui/icons'
+import { LoginModal } from './auth/LoginModal'
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -29,9 +30,9 @@ export const Header = () => {
           >
             Favorites
           </Button>
-          <Button color="white" variant="outline" mr={6}>
+          <LoginModal color="white" variant="outline" mr={6}>
             Login
-          </Button>
+          </LoginModal>
         </ButtonGroup>
       </HStack>
       <FavoritesDrawer isOpen={isOpen} onClose={onClose} />
