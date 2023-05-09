@@ -37,7 +37,11 @@ export const Header = () => {
           >
             {t('favorites')}
           </Button>
-          {user ? <Button onClick={logout}>Logout</Button> : <LoginModal />}
+          {user ? (
+            <Button onClick={logout}>{t('logout')}</Button>
+          ) : (
+            <LoginModal />
+          )}
           <LangMenu />
         </ButtonGroup>
       </HStack>

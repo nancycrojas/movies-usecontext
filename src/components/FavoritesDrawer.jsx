@@ -30,9 +30,11 @@ export const FavoritesDrawer = ({ isOpen, onClose }) => {
 
         <DrawerHeader color="white">{t('yourFavorites')}</DrawerHeader>
         <DrawerBody>
-          <Button mt={2} onClick={clearFavorites}>
-            {t('clearFavorites')}
-          </Button>
+          {favorites.length > 0 && (
+            <Button mt={2} onClick={clearFavorites}>
+              {t('clearFavorites')}
+            </Button>
+          )}
           {!favorites.length && (
             <Text mt={3} color="white">
               {t('noFavorites')}

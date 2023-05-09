@@ -84,7 +84,7 @@ export const LoginModal = () => {
               {t('close')}
             </Button>
             <Button colorScheme="blue" type="submit">
-              Login
+              {t('login')}
             </Button>
           </ModalFooter>
         </ModalContent>
